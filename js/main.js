@@ -46,6 +46,8 @@ function copyAddress() {
     const ip = 'tahanansmp.playwithbao.com';
     navigator.clipboard.writeText(ip).then(() => {
         showCopyNotification('Server IP copied!');
+    }).catch(() => {
+        showCopyNotification('Failed to copy');
     });
 }
 
@@ -53,6 +55,8 @@ function copyJavaIP() {
     const ip = 'tahanansmp.playwithbao.com';
     navigator.clipboard.writeText(ip).then(() => {
         showCopyNotification('Java IP copied!');
+    }).catch(() => {
+        showCopyNotification('Failed to copy');
     });
 }
 
@@ -60,11 +64,19 @@ function copyBedrockIP() {
     const ip = 'tahanansmp.playwithbao.com:41189';
     navigator.clipboard.writeText(ip).then(() => {
         showCopyNotification('Bedrock address copied! Include port!');
+    }).catch(() => {
+        showCopyNotification('Failed to copy');
     });
 }
 
 // Show notification when copying
 function showCopyNotification(message) {
+    // Remove any existing notification
+    const existingNotification = document.querySelector('.copy-notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+    
     // Create notification element
     const notification = document.createElement('div');
     notification.className = 'copy-notification';
@@ -80,6 +92,8 @@ function showCopyNotification(message) {
         z-index: 9999;
         animation: slideIn 0.3s;
         box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
     `;
     
     document.body.appendChild(notification);
@@ -93,19 +107,22 @@ function showCopyNotification(message) {
     }, 3000);
 }
 
-// Add animation styles
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideIn {
-        from { transform: translateX(100%); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-    }
-    @keyframes slideOut {
-        from { transform: translateX(0); opacity: 1; }
-        to { transform: translateX(100%); opacity: 0; }
-    }
-`;
-document.head.appendChild(style);
+// Add animation styles (only if not already added)
+if (!document.getElementById('copy-animation-styles')) {
+    const style = document.createElement('style');
+    style.id = 'copy-animation-styles';
+    style.textContent = `
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
+}
 
 // ===== Tab Switching =====
 function switchTab(tab) {
@@ -127,31 +144,68 @@ function switchTab(tab) {
     }
 }
 
-// ===== Server Status Simulation =====
-function updateServerStatus() {
-    const playerCount = document.getElementById('player-count');
-    const onlinePlayers = document.getElementById('online-players');
-    const serverTime = document.getElementById('server-time');
-    
-    // Simulate random player count between 5-25
-    if (playerCount && onlinePlayers) {
-        const count = Math.floor(Math.random() * 20) + 5;
-        playerCount.textContent = count;
-        onlinePlayers.textContent = count;
+// ===== REAL SERVER STATUS (UPDATED) =====
+async function fetchServerStatus() {
+    try {
+        const playerCountElement = document.getElementById('player-count');
+        const onlinePlayersElement = document.getElementById('online-players');
+        const statusIndicator = document.querySelector('.status-indicator');
+        const serverTimeElement = document.getElementById('server-time');
+        
+        // Fetch Java server status
+        const response = await fetch('https://api.mcsrvstat.us/2/tahanansmp.playwithbao.com');
+        const data = await response.json();
+        
+        if (data.online) {
+            const online = data.players.online || 0;
+            const max = data.players.max || 100;
+            
+            // Update player counts
+            playerCountElement.textContent = online;
+            onlinePlayersElement.textContent = online;
+            
+            // Update status indicator
+            statusIndicator.style.background = '#00cc66';
+            statusIndicator.style.boxShadow = '0 0 10px #00cc66';
+            
+            // Optional: Update max players if you add that element
+            // const maxPlayersElement = document.getElementById('max-players');
+            // if (maxPlayersElement) maxPlayersElement.textContent = max;
+        } else {
+            playerCountElement.textContent = '0';
+            onlinePlayersElement.textContent = '0';
+            statusIndicator.style.background = '#ff4444';
+            statusIndicator.style.boxShadow = '0 0 10px #ff4444';
+        }
+    } catch (error) {
+        console.error('Failed to fetch server status:', error);
+        document.getElementById('player-count').textContent = '?';
+        document.getElementById('online-players').textContent = '?';
+        document.querySelector('.status-indicator').style.background = '#ffaa00';
+        document.querySelector('.status-indicator').style.boxShadow = '0 0 10px #ffaa00';
     }
     
-    // Update server time
-    if (serverTime) {
+    // Update server time (independent of server status)
+    updateServerTime();
+}
+
+// Update server time
+function updateServerTime() {
+    const serverTimeElement = document.getElementById('server-time');
+    if (serverTimeElement) {
         const now = new Date();
         const hours = now.getUTCHours().toString().padStart(2, '0');
         const minutes = now.getUTCMinutes().toString().padStart(2, '0');
-        serverTime.textContent = `${hours}:${minutes} UTC`;
+        serverTimeElement.textContent = `${hours}:${minutes} UTC`;
     }
 }
 
-// Update every 30 seconds
-setInterval(updateServerStatus, 30000);
-updateServerStatus(); // Initial update
+// Fetch immediately and every 60 seconds
+fetchServerStatus();
+setInterval(fetchServerStatus, 60000);
+
+// Update time every minute as well
+setInterval(updateServerTime, 60000);
 
 // ===== Smooth Scroll for Anchor Links =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -174,56 +228,64 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ===== Discord Button =====
 document.getElementById('discord-btn')?.addEventListener('click', function(e) {
     e.preventDefault();
-    window.open('https://discord.gg/zB2FbfKcN4', '_blank'); // Replace with your Discord invite
+    window.open('https://discord.gg/zB2FbfKcN4', '_blank');
 });
 
-// ===== VOTE BUTTONS - UPDATED AND WORKING =====
+// ===== VOTE BUTTONS - USING DATA-URL ATTRIBUTE =====
+// For this to work, update your HTML vote cards to use data-url instead of target
 document.querySelectorAll('.vote-card').forEach(link => {
     link.addEventListener('click', function(e) {
-        e.preventDefault(); // Prevent default anchor behavior
+        e.preventDefault();
         
-        // Get the vote URL from the target attribute
-        const voteUrl = this.getAttribute('target');
+        // Try to get URL from data-url attribute first
+        let voteUrl = this.getAttribute('data-url');
+        
+        // Fallback to href if data-url doesn't exist
+        if (!voteUrl || voteUrl === '#') {
+            voteUrl = this.getAttribute('href');
+        }
+        
+        // Final fallback to target attribute
+        if (!voteUrl || voteUrl === '#') {
+            voteUrl = this.getAttribute('target');
+        }
         
         if (voteUrl && voteUrl !== '#') {
-            // Open in new tab
             window.open(voteUrl, '_blank');
-            
-            // Optional: Show success message
             showCopyNotification('Thanks for voting! 🎉');
         } else {
-            // Fallback if target is missing
-            console.error('Vote URL not found');
+            console.error('Vote URL not found for:', this);
             showCopyNotification('Vote link coming soon!');
         }
     });
 });
 
-// Alternative approach if target attribute doesn't work:
-// You can also use this mapping approach for more control
+// Alternative mapping approach (uncomment if needed)
+/*
 const voteUrls = {
     'minerank': 'https://www.minerank.com/tahanansmp/vote#vote-now',
     'minecraftservers': 'https://minecraftservers.org/server/684258'
 };
 
-// If you prefer using the mapping approach, replace the above with:
-/*
 document.querySelectorAll('.vote-card').forEach(link => {
     link.addEventListener('click', function(e) {
         e.preventDefault();
         
         const title = this.querySelector('h3')?.textContent.toLowerCase() || '';
+        const imgAlt = this.querySelector('img')?.alt.toLowerCase() || '';
         let voteUrl = '';
         
-        if (title.includes('minerank')) {
+        if (title.includes('minerank') || imgAlt.includes('minerank')) {
             voteUrl = voteUrls.minerank;
-        } else if (title.includes('minecraftservers')) {
+        } else if (title.includes('minecraftservers') || imgAlt.includes('minecraftservers')) {
             voteUrl = voteUrls.minecraftservers;
         }
         
         if (voteUrl) {
             window.open(voteUrl, '_blank');
             showCopyNotification('Thanks for voting! 🎉');
+        } else {
+            showCopyNotification('Vote link coming soon!');
         }
     });
 });
@@ -264,3 +326,4 @@ featureCards.forEach(card => {
 console.log('%c🏠 Tahanan SMP Website', 'font-size: 20px; color: #ffaa00;');
 console.log('%cJoin us at: tahanansmp.playwithbao.com', 'font-size: 14px; color: #00aaff;');
 console.log('%cBedrock Port: 41189', 'font-size: 14px; color: #00cc66;');
+console.log('%cPlayers Online: Real-time via API', 'font-size: 12px; color: #999;');
