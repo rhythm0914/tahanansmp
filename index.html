@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tahanan SMP | Minecraft Server</title>
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon (optional) -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="assets/logo.png" alt="Tahanan SMP Logo" class="logo-img">
+                <span class="logo-text">TAHANAN SMP</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#economy" class="nav-link">Economy</a></li>
+                <li><a href="#how-to-join" class="nav-link">Join</a></li>
+                <li><a href="#vote" class="nav-link">Vote</a></li>
+            </ul>
+            
+            <div class="nav-right">
+                <div class="server-status">
+                    <span class="status-indicator"></span>
+                    <span id="player-count">0</span>/100
+                </div>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">TAHANAN SMP</h1>
+            <p class="hero-subtitle">Where Legends Are Forged • Hard Economy • Cross-Play</p>
+            
+            <div class="server-address">
+                <span class="address-text">tahanansmp.playwithbao.com</span>
+                <button class="copy-btn" onclick="copyAddress()">
+                    <i class="fas fa-copy"></i> Copy IP
+                </button>
+            </div>
+            
+            <div class="hero-buttons">
+                <a href="#how-to-join" class="btn btn-primary">
+                    <i class="fas fa-gamepad"></i> How to Join
+                </a>
+                <a href="#" class="btn btn-secondary" id="discord-btn">
+                    <i class="fab fa-discord"></i> Discord
+                </a>
+            </div>
+            
+            <div class="bedrock-info">
+                <i class="fas fa-mobile-alt"></i>
+                <span>Bedrock Available! Port: 41189</span>
+            </div>
+        </div>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <i class="fas fa-users"></i>
+                <span id="online-players">0</span>
+                <small>Online</small>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span id="uptime">99.9%</span>
+                <small>Uptime</small>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-clock"></i>
+                <span id="server-time">--:--</span>
+                <small>Server Time</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">ABOUT THE SERVER</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Welcome to <strong>Tahanan SMP</strong> – a hard-difficulty economy server where your skills determine your wealth. We've created a challenging environment where every diamond matters and exploration is rewarded.</p>
+                    <p>With our custom-crafted hard economy, you'll need to mine, trade, and strategize to become the wealthiest player. No shortcuts – just pure Minecraft survival at its finest!</p>
+                    
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Hard Difficulty Economy</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Java & Bedrock Cross-Play</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Active Community</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>24/7 Uptime</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <img src="assets/server-preview.jpg" alt="Server Preview">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">SERVER FEATURES</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>Hard Economy</h3>
+                    <p>Diamonds sell for 250 but CANNOT be bought. Emeralds are villager-only. Every resource has true value.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-dragon"></i>
+                    </div>
+                    <h3>Dimension Locked</h3>
+                    <p>Nether and End items cannot be bought – you must explore and conquer to earn them!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <h3>Pet System</h3>
+                    <p>Capture, train, and fight with pets using Capture Leads from the shop.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3>Auction House</h3>
+                    <p>Trade with other players using /ah. Set your prices and become a merchant!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hard-hat"></i>
+                    </div>
+                    <h3>VeinMiner</h3>
+                    <p>Mine entire ore veins with /veinminer toggle. Shift to activate!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Land Protection</h3>
+                    <p>Claim your land with /lands. Never worry about griefers again.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Jobs System</h3>
+                    <p>Earn money by working as a Miner, Farmer, Hunter and more!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Cross-Play</h3>
+                    <p>Java and Bedrock players play together seamlessly. Bedrock port: 41189</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Economy Section -->
+    <section id="economy" class="economy">
+        <div class="container">
+            <h2 class="section-title">HARD ECONOMY HIGHLIGHTS</h2>
+            
+            <div class="economy-showcase">
+                <div class="economy-card diamond">
+                    <h3>💎 DIAMOND</h3>
+                    <p class="price-buy">BUY: ❌ Disabled</p>
+                    <p class="price-sell">SELL: 250</p>
+                </div>
+                
+                <div class="economy-card emerald">
+                    <h3>💚 EMERALD</h3>
+                    <p class="price-buy">BUY: ❌ Disabled</p>
+                    <p class="price-sell">SELL: 10</p>
+                </div>
+                
+                <div class="economy-card netherite">
+                    <h3>🔥 NETHERITE</h3>
+                    <p class="price-buy">BUY: ❌ Disabled</p>
+                    <p class="price-sell">SELL: 1800</p>
+                </div>
+                
+                <div class="economy-card iron">
+                    <h3>⛏️ IRON</h3>
+                    <p class="price-buy">BUY: 25</p>
+                    <p class="price-sell">SELL: 4</p>
+                </div>
+            </div>
+            
+            <div class="economy-note">
+                <i class="fas fa-info-circle"></i>
+                <p>Nether & End items are BUY DISABLED – you must explore dimensions to obtain them!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Join Section -->
+    <section id="how-to-join" class="join">
+        <div class="container">
+            <h2 class="section-title">HOW TO JOIN</h2>
+            
+            <div class="join-tabs">
+                <button class="tab-btn active" onclick="switchTab('java')">JAVA EDITION</button>
+                <button class="tab-btn" onclick="switchTab('bedrock')">BEDROCK EDITION</button>
+            </div>
+            
+            <div id="java-tab" class="tab-content active">
+                <div class="join-card">
+                    <div class="join-step">
+                        <span class="step-number">1</span>
+                        <p>Open Minecraft Java Edition</p>
+                    </div>
+                    <div class="join-step">
+                        <span class="step-number">2</span>
+                        <p>Click Multiplayer → Add Server</p>
+                    </div>
+                    <div class="join-step">
+                        <span class="step-number">3</span>
+                        <p>Server Address: <strong>tahanansmp.playwithbao.com</strong></p>
+                    </div>
+                    <div class="join-step">
+                        <span class="step-number">4</span>
+                        <p>Click Done → Join Server</p>
+                    </div>
+                    
+                    <div class="join-ip">
+                        <span>tahanansmp.playwithbao.com</span>
+                        <button class="copy-btn-small" onclick="copyJavaIP()">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="bedrock-tab" class="tab-content">
+                <div class="join-card">
+                    <div class="join-step">
+                        <span class="step-number">1</span>
+                        <p>Open Minecraft Bedrock Edition</p>
+                    </div>
+                    <div class="join-step">
+                        <span class="step-number">2</span>
+                        <p>Go to Servers → Add Server</p>
+                    </div>
+                    <div class="join-step">
+                        <span class="step-number">3</span>
+                        <p>Server Name: <strong>Tahanan SMP</strong></p>
+                    </div>
+                    <div class="join-step">
+                        <span class="step-number">4</span>
+                        <p>Server Address: <strong>tahanansmp.playwithbao.com</strong></p>
+                    </div>
+                    <div class="join-step">
+                        <span class="step-number">5</span>
+                        <p>Port: <strong>41189</strong></p>
+                    </div>
+                    
+                    <div class="join-ip">
+                        <span>tahanansmp.playwithbao.com:41189</span>
+                        <button class="copy-btn-small" onclick="copyBedrockIP()">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                    
+                    <div class="bedrock-note">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>You MUST include the port number when connecting!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vote Section -->
+    <section id="vote" class="vote">
+        <div class="container">
+            <h2 class="section-title">SUPPORT US BY VOTING</h2>
+            
+            <div class="vote-grid">
+                <a href="#" class="vote-card" target="https://www.minerank.com/tahanansmp/vote#vote-now">
+                    <img src="assets/MineRank.jpeg" alt="MineRank">
+                    <h3>MineRank</h3>
+                    <span>Vote Now →</span>
+                </a>
+                
+                <a href="#" class="vote-card" target="https://minecraftservers.org/server/684258">
+                    <img src="assets/MinecraftServers.svg" alt="MinecraftServers">
+                    <h3>MinecraftServers</h3>
+                    <span>Vote Now →</span>
+                </a>
+                
+                
+            </div>
+            
+            <div class="vote-rewards">
+                <h3>🎁 Voting Rewards</h3>
+                <ul>
+                    <li><i class="fas fa-gem"></i> $1000 in-game money</li>
+                    <li><i class="fas fa-star"></i> 2x Vote Keys</li>
+                    <li><i class="fas fa-tag"></i> Exclusive Vote Crate</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Staff Section -->
+    <section class="staff">
+        <div class="container">
+            <h2 class="section-title">MEET THE STAFF</h2>
+            
+            <div class="staff-grid">
+                <div class="staff-card">
+                    <div class="staff-avatar">
+                        <img src="assets/avatar-owner.jpg" alt="Owner">
+                    </div>
+                    <h3>rhythm</h3>
+                    <span class="staff-role">Owner</span>
+                    <div class="staff-social">
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="assets/logo.png" alt="Tahanan SMP">
+                    <h3>Tahanan SMP</h3>
+                    <p>Hard Difficulty Economy • Cross-Play • Active Community</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-to-join">Join</a></li>
+                        <li><a href="#vote">Vote</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <h4>Connect</h4>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    
+                    <div class="server-ip-footer">
+                        <span>IP: tahanansmp.playwithbao.com</span>
+                        <br>
+                        <span>Bedrock Port: 41189</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Tahanan SMP. All rights reserved. Not affiliated with Mojang Studios.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- External JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>
