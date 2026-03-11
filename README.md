@@ -1,2 +1,2 @@
 # tahanansmp
-tahanansmp.playwithbao.com
+tahanansmp.ultraga.me
