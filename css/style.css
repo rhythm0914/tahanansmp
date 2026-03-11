@@ -5,6 +5,16 @@
     box-sizing: border-box;
 }
 
+/* Add to style.css */
+.server-status.loading .status-indicator {
+    background: #ffaa00;
+    animation: pulse 1.5s infinite;
+}
+
+.server-status.loading #player-count {
+    opacity: 0.5;
+}
+
 :root {
     --primary: #ffaa00;
     --primary-dark: #cc8800;
@@ -1005,5 +1015,460 @@ footer {
     .tab-btn {
         width: 100%;
         max-width: 300px;
+    }
+}
+/* ===== ENHANCED MOBILE RESPONSIVENESS ===== */
+
+/* Extra small devices (phones, 600px and down) */
+@media (max-width: 600px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 40px;
+    }
+    
+    /* Hero section improvements */
+    .hero {
+        min-height: 90vh;
+        padding-top: 60px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+        line-height: 1.2;
+        margin-bottom: 15px;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+    
+    .address-text {
+        padding: 12px 20px;
+        font-size: 1.1rem;
+    }
+    
+    .copy-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0 20px;
+    }
+    
+    .btn {
+        padding: 12px 20px;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .bedrock-info {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+    
+    .hero-stats {
+        position: relative;
+        bottom: auto;
+        margin-top: 30px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 15px;
+        padding: 15px;
+        width: 90%;
+    }
+    
+    .stat-item {
+        flex: 1 1 auto;
+        min-width: 80px;
+    }
+    
+    .stat-item i {
+        font-size: 1.2rem;
+    }
+    
+    .stat-item span {
+        font-size: 1rem;
+    }
+    
+    /* About section */
+    .about {
+        padding: 60px 0;
+    }
+    
+    .about-features {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .about-text p {
+        font-size: 1rem;
+    }
+    
+    /* Features section */
+    .features {
+        padding: 60px 0;
+    }
+    
+    .feature-card {
+        padding: 20px;
+    }
+    
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .feature-icon i {
+        font-size: 1.5rem;
+    }
+    
+    .feature-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .feature-card p {
+        font-size: 0.9rem;
+    }
+    
+    /* Economy section */
+    .economy {
+        padding: 60px 0;
+    }
+    
+    .economy-showcase {
+        gap: 15px;
+    }
+    
+    .economy-card {
+        padding: 20px;
+    }
+    
+    .economy-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .price-sell {
+        font-size: 1.4rem;
+    }
+    
+    .economy-note {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+    
+    /* Join section */
+    .join {
+        padding: 60px 0;
+    }
+    
+    .join-tabs {
+        gap: 10px;
+    }
+    
+    .tab-btn {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+    
+    .join-card {
+        padding: 25px;
+    }
+    
+    .join-step {
+        gap: 15px;
+    }
+    
+    .step-number {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+    
+    .join-step p {
+        font-size: 0.95rem;
+    }
+    
+    .join-ip {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .join-ip span {
+        font-size: 1rem;
+    }
+    
+    .copy-btn-small {
+        width: 100%;
+    }
+    
+    .bedrock-note {
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+    
+    /* Vote section */
+    .vote {
+        padding: 60px 0;
+    }
+    
+    .vote-grid {
+        gap: 15px;
+    }
+    
+    .vote-card {
+        padding: 20px;
+    }
+    
+    .vote-card img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .vote-card h3 {
+        font-size: 1rem;
+    }
+    
+    .vote-rewards {
+        padding: 20px;
+    }
+    
+    .vote-rewards li {
+        font-size: 0.95rem;
+    }
+    
+    /* Staff section */
+    .staff {
+        padding: 60px 0;
+    }
+    
+    .staff-card {
+        padding: 20px;
+    }
+    
+    .staff-avatar {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .staff-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    /* Footer */
+    footer {
+        padding: 40px 0 20px;
+    }
+    
+    .footer-content {
+        gap: 30px;
+    }
+    
+    .footer-logo img {
+        height: 40px;
+    }
+    
+    .footer-logo h3 {
+        font-size: 1.2rem;
+    }
+    
+    .social-icons {
+        justify-content: center;
+    }
+    
+    .server-ip-footer {
+        font-size: 0.85rem;
+    }
+    
+    .footer-bottom {
+        font-size: 0.8rem;
+    }
+    
+    /* Navigation improvements for mobile */
+    .nav-container {
+        padding: 0 15px;
+        height: 70px;
+    }
+    
+    .logo-img {
+        height: 30px;
+    }
+    
+    .logo-text {
+        font-size: 1.2rem;
+    }
+    
+    .server-status {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .nav-menu.active {
+        padding: 20px 0;
+        height: calc(100vh - 70px);
+        overflow-y: auto;
+    }
+    
+    .nav-menu .nav-link {
+        padding: 12px 0;
+        font-size: 1.1rem;
+    }
+}
+
+/* Small devices (601px to 768px) */
+@media (min-width: 601px) and (max-width: 768px) {
+    .container {
+        padding: 0 20px;
+    }
+    
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .hero-stats {
+        width: 90%;
+    }
+    
+    .features-grid,
+    .economy-showcase,
+    .vote-grid,
+    .staff-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .hero-buttons {
+        flex-direction: row;
+    }
+    
+    .btn {
+        padding: 12px 25px;
+    }
+}
+
+/* Medium devices (769px to 992px) */
+@media (min-width: 769px) and (max-width: 992px) {
+    .features-grid,
+    .economy-showcase,
+    .vote-grid,
+    .staff-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .hero-title {
+        font-size: 4rem;
+    }
+}
+
+/* Landscape mode optimization */
+@media (max-height: 600px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding: 100px 0 50px;
+    }
+    
+    .hero-stats {
+        position: relative;
+        bottom: auto;
+        margin-top: 30px;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+    .nav-link,
+    .btn,
+    .copy-btn,
+    .copy-btn-small,
+    .tab-btn,
+    .vote-card,
+    .feature-card,
+    .economy-card,
+    .staff-card,
+    .social-icon {
+        cursor: default;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .nav-link:active,
+    .btn:active,
+    .copy-btn:active,
+    .copy-btn-small:active {
+        transform: scale(0.98);
+    }
+    
+    .feature-card:hover,
+    .economy-card:hover,
+    .vote-card:hover,
+    .staff-card:hover {
+        transform: none;
+    }
+    
+    .feature-card:active,
+    .economy-card:active,
+    .vote-card:active,
+    .staff-card:active {
+        transform: translateY(-5px);
+        transition: 0.1s;
+    }
+}
+
+/* Improve readability on mobile */
+@media (max-width: 768px) {
+    p, li, .about-text p, .feature-card p {
+        line-height: 1.5;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        word-break: break-word;
+    }
+    
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* Fix for notched phones */
+@supports (padding: max(0px)) {
+    .navbar {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+    }
+    
+    .hero-content {
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+    }
+}
+
+/* Loading states for better UX */
+.server-status.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Better modal/notification positioning for mobile */
+@media (max-width: 600px) {
+    .copy-notification {
+        left: 20px;
+        right: 20px;
+        width: auto;
+        text-align: center;
+        bottom: 20px;
+        font-size: 0.9rem;
     }
 }

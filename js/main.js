@@ -9,6 +9,44 @@ if (hamburger) {
     });
 }
 
+// ===== Performance Optimizations for Mobile =====
+if ('ontouchstart' in window) {
+    // Add touch-friendly class to body
+    document.body.classList.add('touch-device');
+    
+    // Disable hover effects on touch devices
+    const style = document.createElement('style');
+    style.textContent = `
+        .touch-device .feature-card:hover,
+        .touch-device .economy-card:hover,
+        .touch-device .vote-card:hover,
+        .touch-device .staff-card:hover {
+            transform: none;
+        }
+        
+        .touch-device .feature-card:active,
+        .touch-device .economy-card:active,
+        .touch-device .vote-card:active,
+        .touch-device .staff-card:active {
+            transform: translateY(-3px);
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Lazy load images for better performance
+if ('loading' in HTMLImageElement.prototype) {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    images.forEach(img => {
+        img.loading = 'lazy';
+    });
+} else {
+    // Fallback for browsers that don't support lazy loading
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+    document.body.appendChild(script);
+}
+
 // Close mobile menu when clicking a link
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
@@ -43,7 +81,7 @@ window.addEventListener('scroll', () => {
 
 // ===== Copy IP Functions =====
 function copyAddress() {
-    const ip = 'tahanansmp.playwithbao.com';
+    const ip = 'tahanansmp.ultraga.me';
     navigator.clipboard.writeText(ip).then(() => {
         showCopyNotification('Server IP copied!');
     }).catch(() => {
@@ -52,7 +90,7 @@ function copyAddress() {
 }
 
 function copyJavaIP() {
-    const ip = 'tahanansmp.playwithbao.com';
+    const ip = 'tahanansmp.ultraga.me';
     navigator.clipboard.writeText(ip).then(() => {
         showCopyNotification('Java IP copied!');
     }).catch(() => {
@@ -61,7 +99,7 @@ function copyJavaIP() {
 }
 
 function copyBedrockIP() {
-    const ip = 'tahanansmp.playwithbao.com:41189';
+    const ip = 'tahanansmp.ultraga.me:19029';
     navigator.clipboard.writeText(ip).then(() => {
         showCopyNotification('Bedrock address copied! Include port!');
     }).catch(() => {
@@ -144,7 +182,7 @@ function switchTab(tab) {
     }
 }
 
-// ===== REAL SERVER STATUS (UPDATED) =====
+// ===== REAL SERVER STATUS (FIXED IP) =====
 async function fetchServerStatus() {
     try {
         const playerCountElement = document.getElementById('player-count');
@@ -152,8 +190,8 @@ async function fetchServerStatus() {
         const statusIndicator = document.querySelector('.status-indicator');
         const serverTimeElement = document.getElementById('server-time');
         
-        // Fetch Java server status
-        const response = await fetch('https://api.mcsrvstat.us/2/tahanansmp.playwithbao.com');
+        // Using the direct IP for more reliable connection
+        const response = await fetch('https://api.mcsrvstat.us/2/185.207.166.85:19029');
         const data = await response.json();
         
         if (data.online) {
@@ -167,10 +205,6 @@ async function fetchServerStatus() {
             // Update status indicator
             statusIndicator.style.background = '#00cc66';
             statusIndicator.style.boxShadow = '0 0 10px #00cc66';
-            
-            // Optional: Update max players if you add that element
-            // const maxPlayersElement = document.getElementById('max-players');
-            // if (maxPlayersElement) maxPlayersElement.textContent = max;
         } else {
             playerCountElement.textContent = '0';
             onlinePlayersElement.textContent = '0';
@@ -179,8 +213,8 @@ async function fetchServerStatus() {
         }
     } catch (error) {
         console.error('Failed to fetch server status:', error);
-        document.getElementById('player-count').textContent = '?';
-        document.getElementById('online-players').textContent = '?';
+        document.getElementById('player-count').textContent = '0';
+        document.getElementById('online-players').textContent = '0';
         document.querySelector('.status-indicator').style.background = '#ffaa00';
         document.querySelector('.status-indicator').style.boxShadow = '0 0 10px #ffaa00';
     }
@@ -324,6 +358,6 @@ featureCards.forEach(card => {
 
 // ===== Console Welcome Message =====
 console.log('%c🏠 Tahanan SMP Website', 'font-size: 20px; color: #ffaa00;');
-console.log('%cJoin us at: tahanansmp.playwithbao.com', 'font-size: 14px; color: #00aaff;');
-console.log('%cBedrock Port: 41189', 'font-size: 14px; color: #00cc66;');
+console.log('%cJoin us at: tahanansmp.ultraga.me', 'font-size: 14px; color: #00aaff;');
+console.log('%cBedrock Port: 19029', 'font-size: 14px; color: #00cc66;');
 console.log('%cPlayers Online: Real-time via API', 'font-size: 12px; color: #999;');
