@@ -1472,3 +1472,17 @@ footer {
         font-size: 0.9rem;
     }
 }
+
+/* Server status improvements */
+.status-indicator {
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.server-status {
+    transition: opacity 0.3s;
+}
+
+#player-count, #online-players {
+    transition: color 0.3s;
+    font-weight: 600;
+}
